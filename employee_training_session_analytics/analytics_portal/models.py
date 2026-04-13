@@ -11,6 +11,23 @@ class Employee(models.Model):
     def __str__(self):
         return self.full_name
     
+class Enrollment(models):
+    status_choices = [(1,"ENROLLED"),(2,"COMPLETED"),(3,"CANCELLED")]
+
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="enrollments")
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name="enrollments")
+    status = models.CharField(choices=status_choices)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["employee", "session"], 
+            )
+        ]
+
+    def __str__(self):
+        return self.employee
+    
 class Course (models.Model):
     category_choices = {
         '1':'Technical',
