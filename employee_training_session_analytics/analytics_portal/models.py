@@ -11,16 +11,6 @@ class Employee(models.Model):
     def __str__(self):
         return self.full_name
     
-class Enrollment(models):
-    status_choices = [(1,"ENROLLED"),(2,"COMPLETED"),(3,"CANCELLED")]
-
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="enrollments")
-    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name="enrollments")
-    status = models.CharField(choices=status_choices)
-
-    def __str__(self):
-        return self.employee
-    
 class Course (models.Model):
     category_choices = {
         '1':'Technical',
@@ -40,10 +30,11 @@ class Course (models.Model):
 
     def __str__(self):
         return self.name
+    
 
+    
 
-
-class Sessions (models.Model):
+class Session(models.Model):
 
     mode_choices = {
         '1':'Online',
@@ -57,4 +48,14 @@ class Sessions (models.Model):
 
     def __str__(self):
         return self.name
+        return self.employee
+
+class Enrollment(models):
+    status_choices = [(1,"ENROLLED"),(2,"COMPLETED"),(3,"CANCELLED")]
+
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="enrollments")
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name="enrollments")
+    status = models.CharField(choices=status_choices)
+
+    def __str__(self):
         return self.employee
