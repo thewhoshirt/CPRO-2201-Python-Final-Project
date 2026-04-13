@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Employee, Enrollment
+from .models import Employee, Enrollment, Course, Session
 from .forms import EmployeeForm
 
 # Create your views here.
@@ -40,3 +40,8 @@ def delete_employee(request, id):
     employee.delete()
 
     return redirect("employee_list")
+
+def course_list(request):
+    courses = Course.objects.all()
+
+    return render(request, 'analytics_portal/course/course_list.html', {'courses':courses})

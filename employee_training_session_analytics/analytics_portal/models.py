@@ -25,11 +25,11 @@ class Course (models.Model):
     }
 
     title = models.CharField(max_length=200)
-    category = models.CharField(max_length=100)
-    duration_minutes = models.IntegerField(choices = category_choices)
+    category = models.CharField(choices = category_choices)
+    duration_minutes = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self.title
     
 
     
@@ -46,8 +46,7 @@ class Session(models.Model):
     mode = models.CharField(choices=mode_choices)
 
     def __str__(self):
-        return self.name
-        return self.employee
+        return self.course
 
 class Enrollment(models.Model):
     status_choices = [(1,"ENROLLED"),(2,"COMPLETED"),(3,"CANCELLED")]
