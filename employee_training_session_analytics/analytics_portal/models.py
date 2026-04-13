@@ -19,7 +19,9 @@ class Enrollment(models):
     status = models.CharField(choices=status_choices)
 
     def __str__(self):
-        return self.employeeclass Course (models.Model):
+        return self.employee
+    
+class Course (models.Model):
     category_choices = {
         '1':'Technical',
         '2':'Security',
