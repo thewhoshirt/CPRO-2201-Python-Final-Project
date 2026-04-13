@@ -60,6 +60,7 @@ class Enrollment(models):
         constraints = [
             models.UniqueConstraint(
                 fields=["employee", "session"], 
+                name='unique_session'
             )
         ]
 
