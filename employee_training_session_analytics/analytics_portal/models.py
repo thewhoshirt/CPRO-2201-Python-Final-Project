@@ -18,5 +18,12 @@ class Enrollment(models):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name="enrollments")
     status = models.CharField(choices=status_choices)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["employee", "session"], 
+            )
+        ]
+
     def __str__(self):
         return self.employee
