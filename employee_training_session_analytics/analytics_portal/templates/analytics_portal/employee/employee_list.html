@@ -7,6 +7,19 @@
 </head>
 <body>
     <h2>Employees</h2>
+    <!-- filter by department -->
+    <form method="GET">
+        <label for="department">Filter by department:</label>
+        <select name="department">
+            <option value="">All</option>
+            {% for value, label in departments %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- display results -->
     <a href="{% url 'add_employee'%}">Add Employee</a>
     <table border="1">
         <tr>
@@ -20,13 +33,18 @@
             <tr>
                 <td>{{employee.full_name}}</td>
                 <td>{{employee.email}}</td>
-                <td>{{employee.department}}</td>
+                <td>{{employee.get_department_display}}</td>
                 <td>
                     <a href="{% url 'update_employee' employee.id %}">Edit</a>
                     <a href="{% url 'delete_employee' employee.id %}">Delete</a>
+                    <a href="{% url 'employee_enrollment_list' employee.id %}">View</a>
                 </td>
             </tr>
+            </table>
+        {% empty %}
+            </table>
+            <tr>No results found.</tr>
         {% endfor %}
-    </table>
+    
 </body>
 </html>
