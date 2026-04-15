@@ -13,7 +13,7 @@
     <form method="GET">
         <label for="status">Filter by status:</label>
         <select name="status">
-            <option value="">All</option>
+            <option value="">---select---</option>
             {% for value, label in status %}
                 <option value="{{ value }}">{{ label }}</option>
             {% endfor %}

@@ -58,6 +58,7 @@ class Enrollment(models.Model):
     def __str__(self):
         return self.employee.email
     
+    # ensures an employee can only enroll in the same session once
     class Meta:
         constraints = [
             models.UniqueConstraint(

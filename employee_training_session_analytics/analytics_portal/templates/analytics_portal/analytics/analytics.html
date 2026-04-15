@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+</head>
+<body>
+    <h2>Analytics</h2>
+    <form method="GET">
+        <label for="page">Choose analytics page:</label>
+        <select name="page">
+            <option value="">---select---</option>
+            <option value="1">Department Participation</option>
+            <option value="2">Employee Training Transcript</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+    {% if page == "1" %}
+        <p>Department Participation content here</p>
+
+
+
+
+
+
+
+    {% elif page == "2" %}
+        <h3>Employee Training Transcript</h3>
+        <p><i>View all training records for one employee.</i></p>
+        <br>
+        <!-- lets user select an employee -->
+        <form method="GET">
+            <input type="hidden" name="page" value="2">
+            <label for="employee">Select an employee:</label>
+            <select name="employee">
+                <option value="">---select---</option>
+                {% for employee in employees %}
+                    <option value="{{ employee.id }}">{{ employee.email }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Search</button>
+        </form>
+        {% if employee %}
+            <p>Employee: {{ employee.full_name }}</p>
+            <p>Department: {{ employee.get_department_display }}</p>
+
+            <!-- display results for specific employee -->
+            <table border="1">
+                <tr>
+                    <th>Date</th>
+                    <th>Course</th>
+                    <th>Status</th>
+                </tr>
+                
+                {% for enrollment in enrollments %}
+                    <tr>
+                        <td>{{enrollment.session.session_date}}</td>
+                        <td>{{enrollment.session.course.title}}</td>
+                        <td>{{enrollment.get_status_display}}</td>
+                    </tr>
+                    </table>
+                {% empty %}
+                    </table>
+                    <tr>No results found.</tr>
+                {% endfor %}
+
+        {% endif %}
+
+    {% endif %}
+</body>
+</html>
