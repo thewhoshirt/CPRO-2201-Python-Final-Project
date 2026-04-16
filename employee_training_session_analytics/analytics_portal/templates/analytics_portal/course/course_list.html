@@ -1,20 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
-</head>
-<body>
-    <h2>Courses List</h2>
+{% extends "analytics_portal/global_layout.html" %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+ <h2>Course</h2>
+
+    <!-- Filter by Category -->
+     <form method="GET">
+        <label for="category">Filter by Category</label>
+        <select name="category" >
+            <option value="">---select---</option>
+            {% for value, label in categories %} 
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search</button>
+     </form>
 
     <table boarder="1">
         <tr> 
             <th>Title</th>
             <th>Category</th>
-            <th>Duration(Minutes)</th>
+            <th>Duration</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for course in courses %}
+        <tr>
+            <td>{{course.title}}</td>
+            <td>{{course.category}}</td>
+            <td>{{course.duration_minutes}}</td>
+            <td><a href="{% url 'update_course' course.id}">Edit</a> &ensp; | &ensp;  <a >Delete</a> </td>
+        {% endfor %}
+
         </tr>
     </table>
-    
-</body>
-</html>
+
+{% endblock %}
