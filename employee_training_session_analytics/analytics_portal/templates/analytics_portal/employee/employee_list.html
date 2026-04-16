@@ -17,28 +17,32 @@
     </form>
 
     <!-- display results -->
-    <a href="{% url 'add_employee'%}">Add Employee</a>
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Department</th>
-            <th>Actions</th>
-        </tr>
-        
-        {% for employee in employees %}
+    <a class="btn btn-success m-2" href="{% url 'add_employee'%}">+ Add Employee</a>
+    <table class="table-responsive table table-striped table-hover" boarder="1"">
+        <thead class="table-dark">
             <tr>
-                <td>{{employee.full_name}}</td>
-                <td>{{employee.email}}</td>
-                <td>{{employee.get_department_display}}</td>
-                <td>
-                    <a href="{% url 'update_employee' employee.id %}">Edit</a>
-                    <a href="{% url 'delete_employee' employee.id %}">Delete</a>
-                </td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Actions</th>
             </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{employee.full_name}}</td>
+                    <td>{{employee.email}}</td>
+                    <td>{{employee.get_department_display}}</td>
+                    <td>
+                        <a class="link-light" href="{% url 'update_employee' employee.id %}">Edit</a>
+                        <a class="link-light" href="{% url 'delete_employee' employee.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4"> No results found.</td>
+                </tr>
+            {% endfor %}
             </table>
-        {% empty %}
-            </table>
-            <tr>No results found.</tr>
-        {% endfor %}
+        </tbody>
 {% endblock %}

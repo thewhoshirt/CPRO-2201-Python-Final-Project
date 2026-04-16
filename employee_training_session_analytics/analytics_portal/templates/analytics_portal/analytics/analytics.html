@@ -54,30 +54,34 @@
             <button type="submit">Search</button>
         </form>
         {% if employee %}
-            <p>Employee: {{ employee.full_name }}</p>
-            <p>Department: {{ employee.get_department_display }}</p>
+            <div class="m-3">
+                <p>Employee: {{ employee.full_name }}</p>
+                <p>Department: {{ employee.get_department_display }}</p>
 
-            <!-- display results for specific employee -->
-            <table class="table">
-                <tr>
-                    <th>Date</th>
-                    <th>Course</th>
-                    <th>Status</th>
-                </tr>
-                
-                {% for enrollment in enrollments %}
-                    <tr>
-                        <td>{{enrollment.session.session_date}}</td>
-                        <td>{{enrollment.session.course.title}}</td>
-                        <td>{{enrollment.get_status_display}}</td>
-                    </tr>
-                    </table>
-                {% empty %}
-                    </table>
-                    <tr>No results found.</tr>
-                {% endfor %}
-
+                <!-- display results for specific employee -->
+                <table class="table-responsive table table-striped table-hover" boarder="1"">
+                    <thead class="table-dark">
+                                <th>Date</th>
+                                <th>Course</th>
+                                <th>Status</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {% for enrollment in enrollments %}
+                            <tr>
+                                <td>{{enrollment.session.session_date}}</td>
+                                <td>{{enrollment.session.course.title}}</td>
+                                <td>{{enrollment.get_status_display}}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4"> No results found.</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </tbody>
+                </div>
         {% endif %}
-
+        
     {% endif %}
 {% endblock %}

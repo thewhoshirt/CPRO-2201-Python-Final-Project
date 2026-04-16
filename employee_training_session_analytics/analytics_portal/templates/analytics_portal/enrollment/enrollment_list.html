@@ -5,7 +5,7 @@
 
 {% block content %}
     <h2>Enrollments</h2>
-    <a href="{% url 'add_enrollment'%}">Enroll Employee</a>
+    <a class="btn btn-success m-2" href="{% url 'add_enrollment'%}">+ Enroll Employee</a>
 
     <!-- filter by status -->
     <form method="GET">
@@ -20,26 +20,30 @@
     </form>
 
     <!-- display results -->
-    <table class="table">
-        <tr>
-            <th>Employee (email)</th>
-            <th>Course</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-        
-        {% for enrollment in enrollments %}
+    <table class="table-responsive table table-striped table-hover" boarder="1"">
+        <thead class="table-dark">
             <tr>
-                <td>{{enrollment.employee.email}}</td>
-                <td>{{enrollment.session}}</td>
-                <td>{{enrollment.get_status_display}}</td>
-                <td>
-                    <a href="{% url 'update_enrollment' enrollment.id %}">Edit</a>
-                </td>
+                <th>Employee (email)</th>
+                <th>Course</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in enrollments %}
+                <tr>
+                    <td>{{enrollment.employee.email}}</td>
+                    <td>{{enrollment.session}}</td>
+                    <td>{{enrollment.get_status_display}}</td>
+                    <td>
+                        <a class="link-light" href="{% url 'update_enrollment' enrollment.id %}">Edit</a>
+                    </td>
+                </tr>
+               {% empty %}
+                <tr>
+                    <td colspan="4"> No results found.</td>
+                </tr>
+            {% endfor %}
             </table>
-        {% empty %}
-            </table>
-            <tr>No results found.</tr>
-        {% endfor %}
+        </tbody>
 {% endblock %}
