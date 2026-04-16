@@ -15,14 +15,28 @@
         <button  type="submit">Search</button>
     </form>
     {% if page == "1" %}
-        <p>Department Participation content here</p>
-
-
-
-
-
-
-
+        <h3>Completed trainings by department</h3>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="fw-bold">Department</th>
+                        <th class="fw-bold">Completed Trainings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dept in departments %}
+                        <tr>
+                            <td class="fw-bold">{{ dept.name }}</td>
+                            <td>{{ dept.completed }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    {% empty %}
+                </table>
+                <tr>No results found.</tr>
+                {% endfor %}
+        </div>
     {% elif page == "2" %}
         <h3>Employee Training Transcript</h3>
         <p><i>View all training records for one employee.</i></p>

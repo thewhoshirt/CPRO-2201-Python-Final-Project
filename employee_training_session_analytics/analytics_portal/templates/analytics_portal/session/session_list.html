@@ -23,53 +23,54 @@
     {% endif %}
 
     <!-- filter by Date Range and/or Instructor -->
-  
-            <form method="GET" action="{% url 'session_list' %}">
-                <!-- Instructor Filter -->
-                 <div class="mb-3">
-                    <label for="instructor_name" class="form-label">Instructor Name:</label>
-                    <input type="text" 
-                           class="form-control"
-                           name="instructor_name"
-                           id="instructor_name"
-                           value="{{ search_instructor }}"
-                           style="max-width: 400px;">
-                 </div>
-            <!--filter by date range -->
-                <!-- Start Date -->
+    
+  <div class="mb-3">
+        <form method="GET" action="{% url 'session_list' %}">
+            <!-- Instructor Filter -->
+                <div class="mb-3">
+                <label for="instructor_name" class="form-label">Instructor Name:</label>
+                <input type="text" 
+                        class="form-control"
+                        name="instructor_name"
+                        id="instructor_name"
+                        value="{{ search_instructor }}"
+                        style="max-width: 400px;">
+                </div>
+        <!--filter by date range -->
+            <!-- Start Date -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="date_start" class="form-label">Start Date:</label>
+                        <input type="date"
+                                class="form-control"
+                                name="date_start"
+                                id="date_start"
+                                value="{{ search_date_start }}">
+                        <small class="form-text text-muted">Format: YYYY-MM-DD</small>
+                    </div>
+                </div>
+                <!-- End Date -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="date_start" class="form-label">Start Date:</label>
-                            <input type="date"
-                                   class="form-control"
-                                   name="date_start"
-                                   id="date_start"
-                                   value="{{ search_date_start }}">
-                            <small class="form-text text-muted">Format: YYYY-MM-DD</small>
-                        </div>
-                    </div>
-                    <!-- End Date -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                            <label for="date_end" class="form-label">End Date:</label>
-                            <input type="date"
-                                   class="form-control"
-                                   name="date_end"
-                                   id="date_end"
-                                   value="{{ search_date_end }}">
-                            <small class="form-text text-muted">Format: YYYY-MM-DD</small>
-                        </div>
+                        <label for="date_end" class="form-label">End Date:</label>
+                        <input type="date"
+                                class="form-control"
+                                name="date_end"
+                                id="date_end"
+                                value="{{ search_date_end }}">
+                        <small class="form-text text-muted">Format: YYYY-MM-DD</small>
                     </div>
                 </div>
-                <!-- Submit button -->
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    <a href="{% url 'session_list' %}" class="btn btn-secondary">Clear</a> 
-                </div>
-            </form>
-    
+            </div>
+            <!-- Submit button -->
+            <div class="d-flex gap-2 mb-5">
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href="{% url 'session_list' %}" class="btn btn-secondary">Clear</a> 
+            </div>
+        </form>
+    </
     <!-- Table Results -->
     <h2 class="mb-3">Number of Sessions<span class=" badge bg-body-tertiary">{{sessions|length }}</span></h2>
 

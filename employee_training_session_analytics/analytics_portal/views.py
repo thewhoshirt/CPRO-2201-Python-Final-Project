@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from datetime import datetime
 from .models import Employee, Enrollment, Course, Session
 from .forms import EmployeeForm, EnrollmentForm, EnrollmentStatusForm, CourseForm, SessionForm
+from django.db.models import Count
 
 # Create your views here.
 def home(request):
@@ -15,16 +16,30 @@ def analytics(request):
 
     # Department Participation
     if page_filter == "1":
+        department_participation =(
+            Enrollment.objects
+            .filter(status='2')
+            .values('employee__department') #group by department
+            .annotate(completed_count=Count('id')) #count enrollments
+            .order_by('-completed_count') #sorts by highest count 
+        )
+
+        # convert to readable format 
+        departments = []
+        dept_choices = Employee._meta.get_field('department').choices
+        dept_dict = dict(dept_choices) #converts the dept choices to dictionary 
+
+        for i in department_participation:
+            dept_value = i['employee__department']
+            dept_name = dept_dict.get(dept_value, dept_value) #gets the name not the number 
+            completed = i['completed_count']
+            departments.append({
+                'name': dept_name, 
+                'completed': completed
+            })
 
 
-
-
-
-
-
-
-
-        return render(request, "analytics_portal/analytics/analytics.html", {"page": page_filter})
+        return render(request, "analytics_portal/analytics/analytics.html", {"page": page_filter, 'departments':departments} )
     
     # Employee Training Transcript
     elif page_filter == "2":
