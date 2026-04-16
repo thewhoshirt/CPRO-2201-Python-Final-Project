@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import Employee, Enrollment, Course, Session
 from .forms import EmployeeForm, EnrollmentForm, EnrollmentStatusForm
 
@@ -95,7 +94,7 @@ def delete_employee(request, id):
     return redirect("employee_list")
 
 # --------------------
-# Enrollements
+# Enrollments
 # --------------------
 
 def enrollment_list(request):
@@ -146,3 +145,12 @@ def course_list(request):
     courses = Course.objects.all()
 
     return render(request, 'analytics_portal/course/course_list.html', {'courses':courses})
+
+# --------------------
+# Sessions 
+# --------------------
+def session_list(request):
+    sessions = Session.objects.all()
+
+    return render(request, 'analytics_portal/session/session_list.html', {'sessions':sessions})
+
