@@ -6,59 +6,88 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}</title>
-    <!-- This will make it so any pages that use this global page, the title with change to reflect what page it is. -->
 </head>
-<body class="m-3">
-    <!-- This will show up on every page -->
-    <header>
-        <h1>Employee Training Analytics Portal</h1>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="#navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="{% url 'employee_list' %}">Employees</a>
-                        </li>
-                    </ul>
+<body class="d-flex flex-column" style="min-height: 100vh; background-color: #a19f9f;">
+    <!-- Header with Navigation -->
+    <header class="border-bottom py-4" style="background-color: #ead1ff;">
+        <div class="container">
+            <h1 class="h2 fw-bold mb-3">Employee Training Analytics Portal</h1>
+            
+            <!-- Menu Toggle Button -->
+            <button class="btn btn-primary mb-3" type="button" id="menuToggle">
+                ☰ Menu
+            </button>
 
-                </div>
-            </div> 
-
-        </nav>        
-
-
-    </header>
-    <!-- All content here will change based on page  -->
-    {% block content %}
-        <!-- Home page content -->
-        <div class="text-center position-absolute top-50 start-50 translate-middle d-flex flex-column">
-            <h2>Welcome to the Employee Training Session Analytics Portal</h2>
-            <div class="m-3">
-                <a class="btn btn-primary" href="{% url 'employee_list' %}">Employees</a>
-                <a class="btn btn-primary" href="{% url 'course_list' %}">Courses</a>
-                <!-- session button -->
-                <a class="btn btn-primary" href="{% url 'enrollment_list' %}">Enrollments</a>
-                <a class="btn btn-primary" href="{% url 'analytics' %}">Analytics</a>
-            </div>
+            <!-- Navigation Menu -->
+            <nav id="navMenu" style="display: none;">
+                <ul class="navbar-nav flex-row gap-2 flex-wrap">
+                    <li class="nav-item flex-grow-1" style="min-width: 120px;">
+                        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item flex-grow-1" style="min-width: 120px;">
+                        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'employee_list' %}">Employees</a>
+                    </li>
+                    <li class="nav-item flex-grow-1" style="min-width: 120px;">
+                        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'course_list' %}">Courses</a>
+                    </li>
+                    <li class="nav-item flex-grow-1" style="min-width: 120px;">
+                        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'session_list' %}">Sessions</a>
+                    </li>
+                    <li class="nav-item flex-grow-1" style="min-width: 120px;">
+                        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'enrollment_list' %}">Enrollments</a>
+                    </li>
+                    <li class="nav-item flex-grow-1" style="min-width: 120px;">
+                        <a class="btn btn-outline-primary btn-sm w-100" href="{% url 'analytics' %}">Analytics</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    {% endblock %}
-    <!-- <br>
-    <br>
-    <br> -->
-    <footer class="text-center fixed-bottom">
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 py-5">
+        <div class="container">
+            {% block content %}
+                <!-- Home page content -->
+                <div class="text-center py-5">
+                    <h2 class="display-5 fw-bold mb-3">Welcome to the Employee Training Analytics Portal</h2>
+                    <br>        
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-md-2">
+                            <a class="btn btn-primary w-100" href="{% url 'employee_list' %}">Employees</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary w-100" href="{% url 'course_list' %}">Courses</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary w-100" href="{% url 'session_list' %}">Sessions</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary w-100" href="{% url 'enrollment_list' %}">Enrollments</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary w-100" href="{% url 'analytics' %}">Analytics</a>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-top text-center text-muted py-3 mt-auto" style="background-color: #e8f4f8;">
         Final Project For CPRO 2201 Python II &ensp; || &ensp; Made By Janelle Andrews & Sydney Embury
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function(){
+            const navMenu = document.getElementById('navMenu');
+            navMenu.style.display = navMenu.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

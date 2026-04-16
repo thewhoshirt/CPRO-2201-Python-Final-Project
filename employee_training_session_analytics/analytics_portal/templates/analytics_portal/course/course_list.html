@@ -3,10 +3,9 @@
 {% block title %}Courses{% endblock %}
 
 {% block content %}
- <h2>Course</h2>
-
+    <h2>Course</h2>
     <!-- Filter by Category -->
-     <form method="GET">
+    <form method="GET">
         <label for="category">Filter by Category</label>
         <select name="category" >
             <option value="">---select---</option>
@@ -17,7 +16,8 @@
         <button type="submit">Search</button>
      </form>
 
-    <table boarder="1">
+     <!-- Display results -->
+    <table class="table" boarder="1">
         <tr> 
             <th>Title</th>
             <th>Category</th>
@@ -30,10 +30,15 @@
             <td>{{course.title}}</td>
             <td>{{course.category}}</td>
             <td>{{course.duration_minutes}}</td>
-            <td><a href="{% url 'update_course' course.id}">Edit</a> &ensp; | &ensp;  <a >Delete</a> </td>
-        {% endfor %}
-
+            <td>
+                <a href="{% url 'update_course' course.id}">Edit</a> 
+                &ensp; | &ensp;  
+                <a href="{% url 'delete_course' course.id %}">Delete</a> 
+            </td>        
         </tr>
-    </table>
-
+        </table>
+    {% empty %}
+        </table>
+        <tr>No results found.</tr>
+    {% endfor %}
 {% endblock %}
