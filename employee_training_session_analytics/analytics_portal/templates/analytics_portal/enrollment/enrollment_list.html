@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enrollments</title>
-</head>
-<body>
+{% extends "analytics_portal/global_layout.html" %}
+
+{% block title %}Enrollments{% endblock %}
+
+
+{% block content %}
     <h2>Enrollments</h2>
     <a href="{% url 'add_enrollment'%}">Enroll Employee</a>
 
@@ -22,7 +20,7 @@
     </form>
 
     <!-- display results -->
-    <table border="1">
+    <table class="table">
         <tr>
             <th>Employee (email)</th>
             <th>Course</th>
@@ -44,5 +42,4 @@
             </table>
             <tr>No results found.</tr>
         {% endfor %}
-</body>
-</html>
+{% endblock %}

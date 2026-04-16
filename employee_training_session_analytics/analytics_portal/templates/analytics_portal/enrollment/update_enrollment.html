@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Enrollment</title>
-</head>
-<body>
+{% extends "analytics_portal/global_layout.html" %}
+
+{% block title %}Enrollments{% endblock %}
+
+
+{% block content %}
     <h2>Update Enrollment</h2>
     <form method = "post">
         {% csrf_token %}
@@ -15,5 +13,4 @@
         <button type="submit">Save</button>
         <button><a  href="{% url 'enrollment_list'%}">Cancel</a></button>
     </form>
-</body>
-</html>
+{% endblock %}

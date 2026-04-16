@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics</title>
-</head>
-<body>
+{% extends "analytics_portal/global_layout.html" %}
+
+{% block title %}Analytics{% endblock %}
+
+
+{% block content %}
     <h2>Analytics</h2>
     <form method="GET">
         <label for="page">Choose analytics page:</label>
@@ -46,7 +44,7 @@
             <p>Department: {{ employee.get_department_display }}</p>
 
             <!-- display results for specific employee -->
-            <table border="1">
+            <table class="table">
                 <tr>
                     <th>Date</th>
                     <th>Course</th>
@@ -68,5 +66,4 @@
         {% endif %}
 
     {% endif %}
-</body>
-</html>
+{% endblock %}
