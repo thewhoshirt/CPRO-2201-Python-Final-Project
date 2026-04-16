@@ -25,3 +25,16 @@ class EnrollmentStatusForm(forms.ModelForm):
     class Meta:
         model = Enrollment
         fields = ["status"]
+
+# adding or updating a Course form 
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = "__all__"
+
+# adding or updating a Course form 
+class SessionForm(forms.ModelForm):
+    class Meta:
+        model = Session
+        fields = "__all__"
+
