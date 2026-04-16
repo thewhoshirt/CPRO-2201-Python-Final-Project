@@ -10,7 +10,7 @@
 
         {{form.as_p}}
 
-        <button type="submit">Save</button>
-        <button><a  href="{% url 'employee_list'%}">Cancel</a></button>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-secondary" href="{% url 'employee_list'%}">Cancel</a>
     </form>
 {% endblock %}

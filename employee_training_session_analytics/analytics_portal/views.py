@@ -3,8 +3,8 @@ from .models import Employee, Enrollment, Course, Session
 from .forms import EmployeeForm, EnrollmentForm, EnrollmentStatusForm
 
 # Create your views here.
-def test(request):
-    return render(request, "analytics_portal/test.html")
+def home(request):
+    return render(request, "analytics_portal/global_layout.html")
 
 # --------------------
 # Analytics
