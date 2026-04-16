@@ -144,8 +144,7 @@ def update_enrollment(request, id):
 
 def course_list(request):
     # gets the categories for the dropdown menu, displays results if category is chosen 
-    category_filter = request.GET.get
-    ('category', '')
+    category_filter = request.GET.get('category', '')
     categories = Course._meta.get_field('category').choices 
 
     courses = Course.objects.all()
@@ -214,7 +213,7 @@ def session_list(request):
     if search_date_start:
         try: 
             start_date = datetime.strptime(search_date_start, '%Y-%m-%d').date()
-            sessions = sessions.filter(sessions_date__gte=start_date)
+            sessions = sessions.filter(session_date__date__gte=start_date)
         except ValueError:
             errors['date_start']='Invalid Format, Use:YYYY-MM-DD'
     
@@ -227,10 +226,10 @@ def session_list(request):
             errors['date_end']='Invalid Format, Use:YYYY-MM-DD'
 
 
-    return render(request, 'analytics_portal/session/session_list.html', {'sessions':sessions, 'search_instructors':search_instructor, 'search_date_start':search_date_start, 'search_date_end':search_date_end,'errors':errors,} )
+    return render(request, 'analytics_portal/session/session_list.html', {'sessions':sessions, 'search_instructor':search_instructor, 'search_date_start':search_date_start, 'search_date_end':search_date_end,'errors':errors,} )
 
 
-def add_session(request, id):
+def add_session(request):
     form = SessionForm()
 
     if request.method =="POST":
@@ -257,4 +256,4 @@ def delete_session(request, id):
     session = Session.objects.get(id=id)
     session.delete()
 
-    return redirect('employee_list')
+    return redirect('session_list')

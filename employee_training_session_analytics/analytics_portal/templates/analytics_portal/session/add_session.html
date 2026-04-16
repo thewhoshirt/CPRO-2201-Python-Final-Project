@@ -3,5 +3,12 @@
 {% block title %}Add Session{% endblock %}
 
 {% block content %}
+<h2>Add Session</h2>
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
 
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn btn-danger" href="{% url 'session_list' %}">Cancel</a>
+</form>
 {% endblock %}
