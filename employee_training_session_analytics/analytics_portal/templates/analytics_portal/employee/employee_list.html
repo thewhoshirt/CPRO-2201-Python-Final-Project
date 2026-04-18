@@ -35,6 +35,7 @@
                     <td>{{employee.get_department_display}}</td>
                     <td>
                         <a class="link-light" href="{% url 'update_employee' employee.id %}">Edit</a>
+                        &ensp; | &ensp;
                         <a class="link-light" href="{% url 'delete_employee' employee.id %}">Delete</a>
                     </td>
                 </tr>

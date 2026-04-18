@@ -31,11 +31,14 @@
                             <td>{{ dept.completed }}</td>
                         </tr>
                     </tbody>
-                </table>
                     {% empty %}
-                </table>
-                <tr>No results found.</tr>
-                {% endfor %}
+                        <tr>
+                            <td colspan="4"> No results found.</td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </tbody>
+            </div>
         </div>
     {% elif page == "2" %}
         <h3>Employee Training Transcript</h3>
