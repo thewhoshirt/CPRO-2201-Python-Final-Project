@@ -16,7 +16,7 @@ class Course (models.Model):
         '1':'Technical',
         '2':'Security',
         '3':'Soft Skills',
-        '4':'Leader Ship',
+        '4':'Leadership',
         '5':'Product Training',
         '6':'Cyber Security',
         '7':'Ethics',

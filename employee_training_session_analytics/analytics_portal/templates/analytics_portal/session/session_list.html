@@ -83,6 +83,7 @@
                         <th>Date</th>
                         <th>Instructor</th>
                         <th>Mode</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,6 +98,11 @@
                                 {% else %}
                                     <span class="badge bg-success">In-Person</span>
                                 {% endif %}
+                            </td>
+                            <td>
+                                <a class="link-light" href="{% url 'update_session' session.id %}">Edit</a>
+                                &ensp; | &ensp;
+                                <a class="link-light" href="{% url 'delete_session' session.id %}">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}
