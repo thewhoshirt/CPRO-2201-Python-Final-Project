@@ -34,7 +34,12 @@ class CourseForm(forms.ModelForm):
 
 # adding or updating a Course form 
 class SessionForm(forms.ModelForm):
+    session_date = forms.DateTimeField(help_text='Format: YYYY-MM-DD')
+
     class Meta:
         model = Session
         fields = "__all__"
+
+       
+            
 

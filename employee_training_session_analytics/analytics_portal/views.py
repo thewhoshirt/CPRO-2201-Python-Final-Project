@@ -18,7 +18,7 @@ def analytics(request):
     if page_filter == "1":
         department_participation =(
             Enrollment.objects
-            .filter(status='2')
+            .filter(status='2') # filter the Enrollments to only includes status 2 (Completed) 
             .values('employee__department') #group by department
             .annotate(completed_count=Count('id')) #count enrollments
             .order_by('-completed_count') #sorts by highest count 
@@ -27,7 +27,7 @@ def analytics(request):
         # convert to readable format 
         departments = []
         dept_choices = Employee._meta.get_field('department').choices
-        dept_dict = dict(dept_choices) #converts the dept choices to dictionary 
+        dept_dict = dict(dept_choices) #converts the dept choices to dictionary, then you can look it up the names by code, original was a tuple 
 
         for i in department_participation:
             dept_value = i['employee__department']
@@ -212,7 +212,7 @@ def delete_course(request, id):
 def session_list(request):
     #starts results with all sessions 
     sessions = Session.objects.all()
-    #dictionary to store error messages
+    #dictionary to store error messages, didn't need in the end. Good to know for future 
     errors = {}
 
     #Search parameter from the form 
@@ -229,7 +229,7 @@ def session_list(request):
         try: 
             start_date = datetime.strptime(search_date_start, '%Y-%m-%d').date()
             sessions = sessions.filter(session_date__date__gte=start_date)
-        except ValueError:
+        except ValueError: #was not needed in the end but good to know for future developments
             errors['date_start']='Invalid Format, Use:YYYY-MM-DD'
     
     #filter by end_date
@@ -237,7 +237,7 @@ def session_list(request):
         try: 
             end_date = datetime.strptime(search_date_end, '%Y-%m-%d').date()
             sessions = sessions.filter(session_date__date__lte=end_date)
-        except ValueError:
+        except ValueError:#was not needed in the end, good to know for future developments 
             errors['date_end']='Invalid Format, Use:YYYY-MM-DD'
 
 

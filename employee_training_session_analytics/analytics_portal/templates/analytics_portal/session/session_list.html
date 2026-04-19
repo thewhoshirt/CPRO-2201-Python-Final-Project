@@ -5,9 +5,10 @@
 
 {% block content %}
     <h2>Sessions</h2>
-
+    
+<!-- Didn't need in the end, but good to know for future.  -->
     <!-- Error messages -->
-     {% if errors %}
+     <!-- {% if errors %}
         {% if errors.date_start %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Date Error:</strong> {{ errors.date_start }}
@@ -20,7 +21,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert">Close</button>
             </div>
         {% endif %}
-    {% endif %}
+    {% endif %} -->
 
     <!-- filter by Date Range and/or Instructor -->
     
@@ -47,7 +48,6 @@
                                 name="date_start"
                                 id="date_start"
                                 value="{{ search_date_start }}">
-                        <small class="form-text text-muted">Format: YYYY-MM-DD</small>
                     </div>
                 </div>
                 <!-- End Date -->
@@ -60,7 +60,6 @@
                                 name="date_end"
                                 id="date_end"
                                 value="{{ search_date_end }}">
-                        <small class="form-text text-muted">Format: YYYY-MM-DD</small>
                     </div>
                 </div>
             </div>
@@ -72,10 +71,13 @@
         </form>
     </
     <!-- Table Results -->
-    <h2 class="mb-3">Number of Sessions<span class=" badge bg-body-tertiary">{{sessions|length }}</span></h2>
-
+    <h2 class="mb-3">Number of Sessions :  <span class=" badge bg-dark">{{sessions|length }}</span></h2>
+    <!-- button to create new session -->
+    <div class="mt-4">
+        <a href="{% url 'add_session' %}" class="btn btn-success">+ Schedule Session</a>
+    </div>
     {% if sessions %}
-        <div class="table-responsive">
+        <div class="table-responsive mt-4">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
@@ -87,6 +89,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- for loop to add session into table -->
                     {% for session in sessions %}
                         <tr>
                             <td>{{ session.course.title }}</td>
@@ -100,6 +103,7 @@
                                 {% endif %}
                             </td>
                             <td>
+                                <!-- action links that will edit or delete item -->
                                 <a class="link-light" href="{% url 'update_session' session.id %}">Edit</a>
                                 &ensp; | &ensp;
                                 <a class="link-light" href="{% url 'delete_session' session.id %}">Delete</a>
@@ -110,14 +114,10 @@
             </table>
         </div>
         {% else %}
-            <div class="alert alert-info" role="alert">
-                No sessions found.
-            </div>
-        {% endif %}
-    
-<!-- button to create new session -->
-    <div class="mt-4">
-        <a href="{% url 'add_session' %}" class="btn btn-success">+ Schedule Session</a>
-    </div>
+        <!-- what will display if there is no sessions -->
+        <div class="alert alert-info" role="alert">
+            No sessions found.
+        </div>
+    {% endif %}
 
 {% endblock %}
