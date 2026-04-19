@@ -18,12 +18,14 @@
 
     <!-- Display results -->
     <div class="mt-4">
+        <!-- add course button -->
         <a href="{% url 'add_course' %}" class="btn btn-success">+ Course</a>
     </div>
     <div class="table-responsive mt-4">
         <table class="table table-striped table-hover" boarder="1">
             <thead class="table-dark">
                 <tr> 
+                    <!-- table head column names  -->
                     <th>Title</th>
                     <th>Category</th>
                     <th>Duration</th>
@@ -31,6 +33,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- For loop to add each course row to the table -->
                 {% for course in courses %}
                     <tr>
                         <td>{{course.title}}</td>
@@ -44,6 +47,7 @@
                     </tr>
                     {% empty %}
                     <tr>
+                        <!-- message for no results  -->
                         <td colspan="4"> No results found.</td>
                     </tr>
                 {% endfor %}

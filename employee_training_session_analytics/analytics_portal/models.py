@@ -1,6 +1,10 @@
 from django.db import models
 
 # Create your models here.
+
+# --------------------
+# Employee
+# --------------------
 class Employee(models.Model):
     department_choices = [("1", "IT"),("2", "HR"),("3", "Sales"),("4","Admin"),("5","Management")]
 
@@ -11,27 +15,32 @@ class Employee(models.Model):
     def __str__(self):
         return self.full_name
     
+# --------------------
+# Course
+# --------------------
+
 class Course (models.Model):
+#    making a dictionary to have the category choices 
     category_choices = {
         '1':'Technical',
-        '2':'Security',
-        '3':'Soft Skills',
-        '4':'Leadership',
-        '5':'Product Training',
-        '6':'Cyber Security',
-        '7':'Ethics',
-        '8':'Other'
-
+        '2':'Soft Skills',
+        '3':'Leadership',
+        '4':'Product Training',
+        '5':'Cyber Security',
+        '6':'Ethics',
+        
     }
 
     title = models.CharField(max_length=200)
     category = models.CharField(choices = category_choices)
     duration_minutes = models.IntegerField()
-
+# returns the title 
     def __str__(self):
         return self.title
     
-    
+# --------------------
+# Session
+# --------------------
 class Session(models.Model):
 
     mode_choices = {
@@ -47,6 +56,9 @@ class Session(models.Model):
     def __str__(self):
         return self.course.title
 
+# --------------------
+# Enrollment 
+# --------------------
 class Enrollment(models.Model):
     status_choices = [("1","ENROLLED"),("2","COMPLETED"),("3","CANCELLED")]
 

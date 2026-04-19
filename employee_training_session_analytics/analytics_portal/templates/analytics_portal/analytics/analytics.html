@@ -4,16 +4,22 @@
 
 
 {% block content %}
+
     <h2>Analytics</h2>
     <form method="GET">
         <label for="page">Choose analytics page:</label>
         <select name="page">
+            <!-- options to display the selected form  -->
             <option value="">---select---</option>
             <option value="1">Department Participation</option>
             <option value="2">Employee Training Transcript</option>
         </select>
         <button  type="submit">Search</button>
     </form>
+
+    <!-- 
+    # Department Participation 
+     -->
     {% if page == "1" %}
         <h3>Completed trainings by department</h3>
         <div class="table-responsive">
@@ -25,6 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- using a for loop print the department rows in table -->
                     {% for dept in departments %}
                         <tr>
                             <td class="fw-bold">{{ dept.name }}</td>
@@ -32,6 +39,7 @@
                         </tr>
                     </tbody>
                     {% empty %}
+                        <!-- If no results display message -->
                         <tr>
                             <td colspan="4"> No results found.</td>
                         </tr>
@@ -40,6 +48,10 @@
                 </tbody>
             </div>
         </div>
+
+<!-- 
+# Employee Training Transcript  
+ -->
     {% elif page == "2" %}
         <h3>Employee Training Transcript</h3>
         <p><i>View all training records for one employee.</i></p>
